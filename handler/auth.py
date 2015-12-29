@@ -1,4 +1,20 @@
 import tornado
+from handler.base import BaseHandler
+
+
+class AuthRegisterHandler(BaseHandler):
+    def get(self):
+        pass
+
+    def post(self):
+        args = self.get_arguments()
+        self.request_post()
+
+        self.send_write()
+
+
+
+
 
 
 class LoginHandler(tornado.web.RequestHandler):

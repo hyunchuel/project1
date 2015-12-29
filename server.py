@@ -1,12 +1,8 @@
 import tornado.ioloop
 import tornado.web
-import handler.auth
 import os.path
 
-
-class MainHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.write("Hello, world")
+import handler.auth
 
 
 class Application(tornado.web.Application):
@@ -17,7 +13,7 @@ class Application(tornado.web.Application):
             template_path=os.path.join(os.path.dirname(__file__), "templates")
         )
         routing = [
-            (r"/", handler.auth.LoginHandler),
+            (r"/auth/register", handler.auth.AuthRegisterHandler),
             (r"/login", handler.auth.LoginHandler)
         ]
 
