@@ -3,6 +3,7 @@ import tornado.web
 import os.path
 
 import handler.auth
+import handler.client
 
 
 class Application(tornado.web.Application):
@@ -10,10 +11,16 @@ class Application(tornado.web.Application):
     def __init__(self):
 
         settings = dict(
-            template_path=os.path.join(os.path.dirname(__file__), "templates")
+            template_path=os.path.join(os.path.dirname(__file__), "templates"),
+            static_path=os.path.join(os.path.dirname(__file__), "static")
         )
         routing = [
+            (r"/client", handler.client.LoadHandler),
+            (r"/client/register", handler.client.RegisterHandler),
+
+
             (r"/auth/register", handler.auth.AuthRegisterHandler),
+            (r"/auth/login", handler.auth.AuthLoginHandler),
             (r"/login", handler.auth.LoginHandler)
         ]
 

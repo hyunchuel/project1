@@ -3,8 +3,8 @@ import simplejson
 
 
 class BaseHandler(tornado.web.RequestHandler):
-    def request_post(self, req):
-        args = {}
+    def request_post(self):
+        args = tornado.escape.json_decode(self.request.body)
         return args
 
     def send_write(self, res):

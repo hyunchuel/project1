@@ -7,10 +7,20 @@ class AuthRegisterHandler(BaseHandler):
         pass
 
     def post(self):
-        args = self.get_arguments()
-        self.request_post()
+        args = self.request_post()
+        print args
 
-        self.send_write()
+        self.send_write({
+            'result': 'success'
+        })
+
+
+class AuthLoginHandler(BaseHandler):
+    def get(self):
+        pass
+
+    def post(self):
+        pass
 
 
 

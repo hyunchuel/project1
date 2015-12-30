@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block body %}
+<form class="form-horizontal ">
+    <div style="height:200px;"></div>
+    <div class="col-md-8 col-md-offset-4">
+        <div class="form-group">
+            <label for="txtEmail" class="col-sm-2 control-label">Email</label>
+            <div class="col-xs-3">
+                <input type="email" class="form-control" id="txtEmail" placeholder="Email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txtPassword1" class="col-sm-2 control-label">Password</label>
+            <div class="col-xs-3">
+                <input type="password" class="form-control" id="txtPassword1" placeholder="Password">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txtPassword2" class="col-sm-2 control-label">Confirm Password</label>
+            <div class="col-xs-3">
+                <input type="password" class="form-control" id="txtPassword2" placeholder="Confirm Password">
+            </div>
+        </div>
+        <div class="form-group" >
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="button" class="btn btn-primary" id="btnSubmit"  onclick="do_submit();" value="Submit">
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    var server_url = '{{ server }}';
+
+    function do_submit(){
+        var email = $('#txtEmail').val();
+        var pwd1 = $('#txtPassword1').val();
+        var pwd2 = $('#txtPassword2').val();
+
+        if (pwd1 != pwd2)
+            utils.error('Not Equal Password');
+
+        $.ajax({
+          type: "POST",
+          url: server_url + '/auth/register',
+          dataType: 'json',
+          data: JSON.stringify({
+            id : email,
+            pwd : pwd1
+          }),
+          success: function(){
+            alert('success');
+          },
+          error: function(){
+            alert('error');
+          }
+        });
+    }
+</script>
+{% end %}
